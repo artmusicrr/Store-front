@@ -2,6 +2,11 @@ import { message } from "antd"
 import { api } from "../../hooks/useApi"
 import { IUser } from "../../types/User"
 
+interface ForgotRequestResponse {
+  message: string
+  // outras propriedades, se houver
+}
+
 export function setUserLocalStorage(user: IUser | null) {
   localStorage.setItem("us", JSON.stringify(user))
 }
@@ -47,6 +52,36 @@ export async function createUser(
   } catch (error) {
     message.error("Erro na criação!")
 
+    return null
+  }
+}
+
+export async function forgotRequest(
+  username: string,
+): Promise<ForgotRequestResponse | null> {
+  try {
+    const response = await api.post("auth/recover-password", { username })
+
+    return response.data as ForgotRequestResponse
+  } catch (error) {
+    return null
+  }
+}
+
+export async function tokenRequest(
+  token: string,
+  confirmPassword: string,
+  password: string,
+): Promise<ForgotRequestResponse | null> {
+  try {
+    const response = await api.post("user/update-password", {
+      token,
+      confirmPassword,
+      password,
+    })
+    console.log("<==DATA==>", response)
+    return response.data as ForgotRequestResponse
+  } catch (error) {
     return null
   }
 }

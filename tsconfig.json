@@ -17,5 +17,5 @@
     "jsx": "react-jsx",
     "types": ["axios"]
   },
-  "include": ["src"]
+  "include": ["src/**/*.tsx", "src/**/*.ts"]
 }

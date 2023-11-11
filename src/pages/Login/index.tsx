@@ -1,7 +1,7 @@
 import React from "react"
 import "./login.css"
 import { useAuth } from "../../contexts/AuthProvider/useAuth"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { Col, Row, Form, Input, Button, message } from "antd"
 
 export const Login = () => {
@@ -44,6 +44,7 @@ export const Login = () => {
           </Form.Item>
 
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+            <Link to="/forgot">Esqueceu a senha ? </Link>
             <Button type="primary" htmlType="submit">
               Sign IN
             </Button>
